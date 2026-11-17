@@ -23,11 +23,17 @@
 (defvar *openmcl-svn-revision* nil)
 (defparameter *openmcl-dev-level* nil)
 
-(defparameter *openmcl-version* (format nil "~d.~d~@[.~a~] ~@[(~a) ~]~~A"
+;;; The common-lisp.net edition (see CLNET-EDITION.md): it carries
+;;; changes not yet in a Clozure CL release, and says so in
+;;; LISP-IMPLEMENTATION-VERSION, which reads "1.14-clnet.N ...".
+(defparameter *openmcl-edition* "clnet.1")
+
+(defparameter *openmcl-version* (format nil "~d.~d~@[.~a~]~@[-~a~] ~@[(~a) ~]~~A"
 					*openmcl-major-version*
 					*openmcl-minor-version*
 					(unless (null *openmcl-revision*)
 					  *openmcl-revision*)
+                                        *openmcl-edition*
 					(if (and (typep *openmcl-svn-revision* 'string)
                                                  (> (length *openmcl-svn-revision*) 0))
                                           *openmcl-svn-revision*)))
